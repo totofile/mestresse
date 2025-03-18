@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const WeeklyOverview = () => {
+const HomePlanner = () => {
   const navigate = useNavigate();
   const [activeDay, setActiveDay] = useState(0);
   
@@ -132,56 +132,129 @@ const WeeklyOverview = () => {
       </div>
       
       {/* Days of the week navigation */}
-      <div className="flex justify-between items-center px-2 py-4">
-        <button className="text-gray-500">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        
-        <div className="flex space-x-2 relative">
-          {days.map((day, index) => (
-            <div key={index} className="relative">
-              <div 
-                className={`py-2 px-4 rounded-full text-center ${index === activeDay ? 'bg-pink-200' : 'bg-pink-100'}`}
-                onClick={() => setActiveDay(index)}
-              >
-                <div className="font-semibold flex items-center justify-center">
-                  {day.name} {day.date}
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                  </svg>
+        <div className="flex justify-between items-center px-2 py-4">
+          <button className="text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <div className="flex space-x-2 relative">
+            {days.map((day, index) => (
+          <div key={index} className="relative">
+            <div 
+              className={`py-2 px-4 rounded-full text-center ${index === activeDay ? 'bg-pink-200' : 'bg-pink-100'}`}
+              onClick={() => setActiveDay(index)}
+            >
+              <div className="font-semibold flex items-center justify-center">
+            {day.name} {day.date}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+              </div>
+            </div>
+            {/* Plus icon with dropdown menu */}
+            <div className="flex justify-center mt-1">
+              <div className="relative">
+            <button 
+              onClick={(e) => {
+                e.currentTarget.nextElementSibling.classList.toggle('hidden');
+              }}
+              className="p-1 rounded-full hover:bg-gray-100"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
+            
+            {/* Dropdown menu */}
+            <div className="hidden absolute z-10 mt-2 -ml-40 w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100">
+              {/* Matières section */}
+              <div className="py-1">
+                <div className="px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100">
+              Matières
+                </div>
+                <div className="pl-4">
+              <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                Cycle 1
+              </button>
+              <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                Cycle 2
+              </button>
+              <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                Cycle 3
+              </button>
                 </div>
               </div>
-              {/* Plus icon centered below but outside the day container */}
-              <div className="flex justify-center mt-1">
-                <button 
-                  onClick={() => navigate('/planner-editor')}
-                  className="p-1 rounded-full hover:bg-gray-100"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                  </svg>
+              
+              {/* Pause section */}
+              <div className="py-1">
+                <div className="px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100">
+              Pause
+                </div>
+                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              Déjeuner
+                </button>
+                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              Récréation
+                </button>
+                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              Rituels
+                </button>
+                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              Sortie
+                </button>
+              </div>
+              
+              {/* Type d'activité section */}
+              <div className="py-1">
+                <div className="px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100">
+              Type d'activité
+                </div>
+                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              Rituels
+                </button>
+                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              Sortie
+                </button>
+                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              Devoirs
+                </button>
+                <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+              APC
+                </button>
+              </div>
+              
+              {/* Create custom field */}
+              <div className="py-1">
+                <button className="flex items-center w-full px-4 py-2 text-sm text-indigo-600 hover:bg-gray-100">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+              Créer un champ personnalisé
                 </button>
               </div>
             </div>
-          ))}
+              </div>
+            </div>
+          </div>
+            ))}
+          </div>
+          
+          <button className="text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+          
+          <div className="ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
         </div>
         
-        <button className="text-gray-500">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-        
-        <div className="ml-2">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-          </svg>
-        </div>
-      </div>
-      
-      {/* Weekly overview grid */}
+        {/* Weekly overview grid */}
       <div className="flex justify-between px-4 py-2 space-x-2">
         {days.map((day, dayIndex) => (
           <div key={dayIndex} className="flex-1 border rounded-lg p-2">
@@ -225,4 +298,4 @@ const WeeklyOverview = () => {
   );
 };
 
-export default WeeklyOverview;
+export default HomePlanner;
